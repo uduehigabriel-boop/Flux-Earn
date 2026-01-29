@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invite Friends • Flux Earn</title>
+  <link rel="stylesheet" href="invite.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+<header class="top-header">
+  <h2>Invite Friends</h2>
+</header>
+
+<main class="container">
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-card referrals">
+      <p class="stat-label">Total Referrals</p>
+      <h2 id="totalReferrals">0</h2>
+    </div>
+    <div class="stat-card activeReferrals">
+      <p class="stat-label">Active Referrals</p>
+      <h2 id="activeReferrals">0</h2>
+    </div>
+  </div>
+  
+  
+  <!-- Referral Link Card -->
+  <div class="referral-card">
+    <p>Your Referral Link</p>
+    <div class="link-wrapper">
+      <input type="text" id="refLink" readonly>
+    </div>
+    <div class="referral-buttons">
+      <button id="copyBtn">Copy Link</button>
+      <button id="shareBtn">Share</button>
+    </div>
+  </div>
+
+  <!-- Referral List -->
+  <div class="referral-card">
+    <p>Your Referrals (Join Order)</p>
+    <div class="referral-list" id="referralList">
+      <p class="loading">Loading referrals...</p>
+    </div>
+  </div>
+
+</main>
+
+<!-- Bottom Nav -->
+<nav class="bottom-nav">
+  <button onclick="go('dashboard.html')">
+    <span class="material-icons">home</span>
+    <p>Home</p>
+  </button>
+  <button onclick="go('task.html')">
+    <span class="material-icons">task</span>
+    <p>Tasks</p>
+  </button>
+  <button class="active">
+    <span class="material-icons">groups</span>
+    <p>Invite</p>
+  </button>
+  <button onclick="go('withdrawal.html')">
+    <span class="material-icons">account_balance_wallet</span>
+    <p>Wallet</p>
+  </button>
+</nav>
+
+<script src="invite.js"></script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b0b0b;
+  color: white;
+}
+
+/* TOP BAR */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 10px;
+  background: #111;
+  box-shadow: 0 4px 12px rgba(255, 140, 0, 0.2);
+}
+
+.topbar h2 {
+  color: #ff8c00;
+}
+
+#logoutBtn {
+  background: #ff8c00;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  color: black;
+}
+
+/* CONTAINER */
+.container {
+  padding: 20px;
+  padding-bottom: 90px;
+}
+
+/* BALANCE CARD */
+
+.balance-box.glowing {
+  flex: 1;
+  background: linear-gradient(145deg, #151515, #0f0f0f);
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  color: #ffffff;
+  font-weight: bold;
+  position: relative;
+  box-shadow: 0 0 15px rgba(255, 140, 0, 0.4), 0 0 25px rgba(255, 140, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hover Animation */
+.balance-box.glowing:hover {
+  box-shadow: 0 0 25px rgba(255, 140, 0, 0.7), 0 0 35px rgba(255, 140, 0, 0.5);
+  transform: scale(1.05);
+}
+
+
+.balance-card p { color: #aaa; }
+.balance-card h1 {
+  font-size: 32px;
+  margin: 10px 0;
+  color: #ff8c00;
+}
+
+.stats-row {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+}
+
+/* Glowing Referral Box */
+.stat-box.glowing {
+  flex: 1;
+  background: linear-gradient(145deg, #151515, #0f0f0f);
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  color: #ff8c00;
+  font-weight: bold;
+  position: relative;
+  box-shadow: 0 0 15px rgba(255, 140, 0, 0.4), 0 0 25px rgba(255, 140, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hover Animation */
+.stat-box.glowing:hover {
+  box-shadow: 0 0 25px rgba(255, 140, 0, 0.7), 0 0 35px rgba(255, 140, 0, 0.5);
+  transform: scale(1.05);
+}
+
+.stat-box h3 {
+  font-size: 28px;
+  margin: 0;
+  color: #ff8c00;
+}
+
+.stat-box p {
+  margin: 5px 0 0;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* ACTION CARDS */
+.section-title { margin-top: 30px; }
+
+.action-card {
+  background: #151515;
+  border-radius: 15px;
+  padding: 15px;
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid rgba(255, 140, 0, 0.2);
+}
+
+.action-card h4 { margin: 0; }
+.action-card p { margin: 0; font-size: 13px; color: #bbb; }
+
+/* BOTTOM NAV */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #111;
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 0;
+  border-top: 1px solid #222;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  color: #aaa;
+  text-align: center;
+}
+
+.nav-btn.active,
+.nav-btn span { color: #ff8c00; }
+
+.nav-btn p { font-size: 12px; margin: 0; }
+

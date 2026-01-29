@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Flux Earn Admin Panel</title>
+  <link rel="stylesheet" href="admin.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+<header class="top-header">
+  <h2>Admin Panel</h2>
+  <button id="logoutBtn">Logout</button>
+</header>
+
+<main class="container">
+
+  <!-- Add Task Section -->
+  <section class="add-task-section">
+    <h3>Add New Task</h3>
+    <input type="text" id="taskTitle" placeholder="Task title">
+    <input type="text" id="taskLink" placeholder="Task link">
+    <button id="addTaskBtn">Add Task</button>
+    <p id="taskMsg"></p>
+  </section>
+
+  <!-- Active Tasks -->
+  <section class="task-list-section">
+    <h3>Active Tasks</h3>
+    <div id="taskList">
+      <p>Loading tasks...</p>
+    </div>
+  </section>
+
+  <!-- Pending Submissions -->
+  <section class="submission-list-section">
+    <h3>Pending Submissions</h3>
+    <div id="submissionList">
+      <p>Loading submissions...</p>
+    </div>
+  </section>
+  
+  
+  <!-- Withdrawal Submissions -->
+  <section class="withdrawal-list-section">
+    <h3>Pending Withdrawals</h3>
+    <div id="withdrawalList">
+      <p>Loading withdrawals...</p>
+    </div>
+  </section>
+
+</main>
+
+<script src="admin.js"></script>
+</body>
+</html>

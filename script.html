@@ -1,0 +1,238 @@
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyCsc2F77zXlzMAcSWKiECt_gi48acpvX-Q",
+    authDomain: "flip-earn-d3290.firebaseapp.com",
+    projectId: "flip-earn-d3290",
+    storageBucket: "flip-earn-d3290.firebasestorage.app",
+    messagingSenderId: "204135849044",
+    appId: "1:204135849044:web:23ef5a133332a7fe9061c1",
+    measurementId: "G-WH5GHB4RPF"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+
+file:///signup.html?ref=undefined
+
+// 🔥 FIREBASE INIT
+firebase.initializeApp({
+  apiKey: "AIzaSyDkCvEEgks_sCqkxV40nD-xGRm2Ul8LAPY",
+  authDomain: "green-earn-1a638.firebaseapp.com",
+  projectId: "green-earn-1a638",
+});
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+// 🔐 ADMIN UID
+const ADMIN_UID = "XWORozeuWtTCPd1EvIRypDhLVr32";
+
+// 📌 ELEMENTS
+const logoutBtn = document.getElementById("logoutBtn");
+const addTaskBtn = document.getElementById("addTaskBtn");
+const taskTitle = document.getElementById("taskTitle");
+const taskLink = document.getElementById("taskLink");
+const taskMsg = document.getElementById("taskMsg");
+const taskList = document.getElementById("taskList");
+const submissionList = document.getElementById("submissionList");
+const withdrawalList = document.getElementById("withdrawalList");
+
+
+// 🔓 LOGOUT
+logoutBtn.onclick = async () => {
+  await auth.signOut();
+  window.location.href = "login.html";
+};
+
+
+// 🔒 ADMIN AUTH CHECK
+auth.onAuthStateChanged(user => {
+  if (!user) return window.location.href = "login.html";
+  if (user.uid !== ADMIN_UID) return alert("Access denied");
+
+  loadTasks();
+  loadPendingSubmissions();
+  loadWithdrawals();
+});
+
+
+// =======================
+// 🟢 TASK MANAGEMENT
+// =======================
+
+// ➕ ADD TASK
+addTaskBtn.onclick = async () => {
+  const title = taskTitle.value.trim();
+  const link = taskLink.value.trim();
+  taskMsg.textContent = "";
+
+  if (!title || !link) {
+    taskMsg.style.color = "red";
+    taskMsg.textContent = "Fill all fields!";
+    return;
+  }
+
+  await db.collection("tasks").add({
+    title,
+    link,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+
+  taskMsg.style.color = "lime";
+  taskMsg.textContent = "Task added!";
+  taskTitle.value = "";
+  taskLink.value = "";
+  loadTasks();
+};
+
+
+// 📋 LOAD TASKS
+async function loadTasks() {
+  taskList.innerHTML = "Loading tasks...";
+  const snap = await db.collection("tasks").orderBy("createdAt","desc").get();
+
+  if (snap.empty) {
+    taskList.innerHTML = "<p>No tasks</p>";
+    return;
+  }
+
+  taskList.innerHTML = "";
+  snap.forEach(doc => {
+    const t = doc.data();
+
+    const div = document.createElement("div");
+    div.className = "task-card";
+    div.innerHTML = `
+      <b>${t.title}</b> - <a href="${t.link}" target="_blank">Open</a>
+      <button onclick="deleteTask('${doc.id}')">Remove</button>
+    `;
+    taskList.appendChild(div);
+  });
+}
+
+async function deleteTask(id) {
+  await db.collection("tasks").doc(id).delete();
+  loadTasks();
+}
+
+
+
+// =======================
+// 🟠 TASK SUBMISSIONS
+// =======================
+
+async function loadPendingSubmissions() {
+  submissionList.innerHTML = "Loading submissions...";
+  const snap = await db.collection("submissions").get();
+
+  submissionList.innerHTML = "";
+  let count = 0;
+
+  snap.forEach(doc => {
+    const s = doc.data();
+    if (s.status !== "pending") return;
+    count++;
+
+    const div = document.createElement("div");
+    div.className = "submission-card";
+    div.innerHTML = `
+      <p><b>User:</b> ${s.userId}</p>
+      <p><b>Task:</b> ${s.taskTitle}</p>
+      <img src="${s.screenshotURL}" width="150"/>
+      <p><b>Reward:</b> ₦${s.reward}</p>
+      <button onclick="approveSubmission('${doc.id}','${s.userId}',${s.reward})">Approve</button>
+      <button onclick="rejectSubmission('${doc.id}')">Reject</button>
+    `;
+    submissionList.appendChild(div);
+  });
+
+  if (count === 0) submissionList.innerHTML = "<p>No pending submissions</p>";
+}
+
+
+// ✅ APPROVE TASK
+async function approveSubmission(id, userId, reward) {
+  const userRef = db.collection("users").doc(userId);
+
+  await userRef.update({
+    balance: firebase.firestore.FieldValue.increment(reward),
+    totalEarnings: firebase.firestore.FieldValue.increment(reward),
+    completedTasks: firebase.firestore.FieldValue.increment(1) // ⭐ THIS LINE
+  });
+
+  await db.collection("submissions").doc(id).delete();
+  loadPendingSubmissions();
+}
+
+
+// ❌ REJECT TASK
+async function rejectSubmission(id) {
+  await db.collection("submissions").doc(id).delete();
+  loadPendingSubmissions();
+}
+
+
+
+// =======================
+// 🔵 WITHDRAWALS
+// =======================
+
+async function loadWithdrawals() {
+  withdrawalList.innerHTML = "Loading withdrawals...";
+
+  const snap = await db.collection("withdrawals")
+    .where("status","==","pending")
+    .get();
+
+  withdrawalList.innerHTML = "";
+
+  if (snap.empty) {
+    withdrawalList.innerHTML = "<p>No pending withdrawals.</p>";
+    return;
+  }
+
+  snap.forEach(doc => {
+    const w = doc.data();
+
+    const div = document.createElement("div");
+    div.className = "task-card";
+    div.innerHTML = `
+      <p>User: ${w.userId}</p>
+      <p>Amount: ₦${w.amount}</p>
+      <p>Wallet: ${w.wallet}</p>
+      <button onclick="approveWithdrawal('${doc.id}')">Approve</button>
+      <button onclick="rejectWithdrawal('${doc.id}','${w.userId}',${w.amount})">Reject</button>
+    `;
+    withdrawalList.appendChild(div);
+  });
+}
+
+
+// ✅ APPROVE WITHDRAWAL
+async function approveWithdrawal(id) {
+  await db.collection("withdrawals").doc(id).update({ status: "approved" });
+  alert("Withdrawal approved ✅");
+  loadWithdrawals();
+}
+
+
+// ❌ REJECT WITHDRAWAL (REFUND)
+async function rejectWithdrawal(id, uid, amount) {
+  await db.collection("users").doc(uid).update({
+    balance: firebase.firestore.FieldValue.increment(amount)
+  });
+
+  await db.collection("withdrawals").doc(id).update({ status: "rejected" });
+  alert("Withdrawal rejected & refunded ❌");
+  loadWithdrawals();
+}

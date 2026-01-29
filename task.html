@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Tasks • Flux Earn</title>
+  <link rel="stylesheet" href="task.css">
+
+  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+<header class="top-header">
+  <h2>Available Tasks</h2>
+</header>
+
+<!-- STATS ROW -->
+<div class="stats-row">
+  <div class="stat-card earnings">
+    <p class="stat-label">Total Earned</p>
+    <h2 id="totalEarned">₦0</h2>
+  </div>
+
+  <div class="stat-card tasks">
+    <p class="stat-label">Completed Tasks</p>
+    <h2 id="completedTasks">0</h2>
+  </div>
+</div>
+  
+<main id="taskList" class="task-container">
+  <p class="loading">Loading tasks...</p>
+</main>
+
+<!-- Bottom Nav -->
+<nav class="bottom-nav">
+  <button onclick="go('dashboard.html')">
+    <span class="material-icons">home</span>
+    <p>Home</p>
+  </button>
+  <button class="active">
+    <span class="material-icons">task</span>
+    <p>Tasks</p>
+  </button>
+  <button onclick="go('invite.html')">
+    <span class="material-icons">groups</span>
+    <p>Invite</p>
+  </button>
+  <button onclick="go('withdrawal.html')">
+    <span class="material-icons">account_balance_wallet</span>
+    <p>Wallet</p>
+  </button>
+</nav>
+
+<script src="task.js"></script>
+</body>
+</html>

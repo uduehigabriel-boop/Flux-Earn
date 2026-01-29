@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flux Earn Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css" />
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+<!-- 🔝 TOP BAR -->
+<header class="topbar">
+  <h2>Flux Earn</h2>
+  <button id="logoutBtn">Logout</button>
+</header>
+
+<!-- 💳 MAIN CONTENT -->
+<main class="container">
+
+  <!-- BALANCE CARD -->
+  <div class="balance-card">
+    <div class="balance-box glowing">
+    <p>Your Balance</p>
+    <h1>₦<span id="balance">0</span></h1>
+    <small>Total Earned: ₦<span id="totalEarned">0</span></small>
+  </div>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat-box glowing">
+    <h3 id="refCount">0</h3>
+    <p>Referrals</p>
+  </div>
+</div>
+  
+  <!-- START EARNING -->
+  <h3 class="section-title">Start Earning</h3>
+
+  <div class="action-card" onclick="goInvite()">
+    <div>
+      <h4>Invite Friends</h4>
+      <p>Earn ₦200 per referral</p>
+    </div>
+    <span class="material-icons">arrow_forward_ios</span>
+  </div>
+
+  <div class="action-card" onclick="goTasks()">
+    <div>
+      <h4>Complete Tasks</h4>
+      <p>Do simple social tasks</p>
+    </div>
+    <span class="material-icons">arrow_forward_ios</span>
+  </div>
+  
+  <div class="action-card" onclick="goWithdrawal()">
+    <div>
+      <h4>Withdraw Earnings</h4>
+      <p>Withdraw to your Bank</p>
+    </div>
+    <span class="material-icons">arrow_forward_ios</span>
+  </div>
+
+
+</main>
+
+<!-- 🔻 BOTTOM NAV -->
+<nav class="bottom-nav">
+  <button class="nav-btn active"><span class="material-icons">home</span><p>Home</p></button>
+  <button class="nav-btn" onclick="goTasks()"><span class="material-icons">task</span><p>Tasks</p></button>
+  <button class="nav-btn" onclick="goInvite()"><span class="material-icons">group</span><p>Invite</p></button>
+  <button class="nav-btn" onclick="goWithdrawal()"><span class="material-icons">account_balance_wallet</span><p>Wallet</p></button>
+</nav>
+
+<script src="dashboard.js"></script>
+</body>
+</html>

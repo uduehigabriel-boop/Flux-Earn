@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Withdrawal • Flux Earn</title>
+  <link rel="stylesheet" href="withdrawal.css">
+
+  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+<header class="top-header"><h2>Withdrawal</h2></header>
+
+<div class="container">
+
+  <div class="balance-card">
+    <p>Your Balance</p>
+    <h1 id="balance">₦0</h1>
+  </div>
+
+  <div class="withdraw-card">
+    <input type="number" id="amount" placeholder="Enter amount (Min ₦500)">
+    <input type="text" id="wallet" placeholder="Enter Wallet Address">
+    <button id="withdrawBtn">Request Withdrawal</button>
+    <div id="msg"></div>
+  </div>
+
+</div>
+
+<!-- Bottom Nav -->
+<nav class="bottom-nav">
+  <button onclick="go('dashboard.html')">
+    <span class="material-icons">home</span><p>Home</p>
+  </button>
+  <button onclick="go('task.html')">
+    <span class="material-icons">task</span><p>Tasks</p>
+  </button>
+  <button onclick="go('invite.html')">
+    <span class="material-icons">groups</span><p>Invite</p>
+  </button>
+  <button class="active">
+    <span class="material-icons">account_balance_wallet</span><p>Wallet</p>
+  </button>
+</nav>
+
+<script src="withdrawal.js"></script>
+</body>
+</html>

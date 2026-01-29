@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f0f0f;
+  color: white;
+}
+
+.top-header {
+  background: #ff8c00;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-header button {
+  background: #111;
+  color: #ff8c00;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.container { padding: 15px; }
+
+input { 
+  width: 90%; 
+  padding: 8px; 
+  margin: 5px 0; 
+  border-radius: 6px; 
+  border: none; 
+}
+
+button { 
+  background: orange; 
+  border: none; 
+  color: black; 
+  padding: 8px 12px; 
+  margin-top: 5px; 
+  cursor: pointer; 
+  border-radius: 6px; 
+}
+
+.task-card, .submission-card {
+  background: #1b1b1b;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+}
+
+.submission-card img { max-width: 150px; margin-top: 5px; display: block; }
+
+.approve-btn { background: #00ff88; color: #000; margin-right:5px;}
+.reject-btn { background: #ff4444; color: #fff; }
+.remove-task-btn { background: #ff4444; color: #fff; margin-top:5px; }

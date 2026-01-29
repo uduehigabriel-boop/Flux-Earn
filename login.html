@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | Earn Platform</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Style -->
+  <link rel="stylesheet" href="login.css">
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+
+<body class="auth-body">
+
+  <div class="auth-box">
+    <h2 id="formTitle">Create Account</h2>
+
+    <input type="text" id="fullName" placeholder="Full Name">
+    <input type="text" id="username" placeholder="Username">
+
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <input type="password" id="confirmPassword" placeholder="Confirm Password">
+
+    <button id="authBtn">Sign Up</button>
+
+    <p class="switch-text">
+      Already have an account?
+      <span id="switchMode">Login</span>
+    </p>
+
+    <p id="errorMsg"></p>
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>
